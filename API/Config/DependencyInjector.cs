@@ -1,4 +1,5 @@
-using Application.Profiles;
+using Domain.Repositories;
+using Infra.Repositories;
 
 namespace API.Config
 {
@@ -7,6 +8,8 @@ namespace API.Config
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

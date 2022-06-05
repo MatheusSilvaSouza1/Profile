@@ -2,6 +2,7 @@ using Application.Commands;
 using Application.DTOs.Response;
 using AutoMapper;
 using Domain;
+using Domain.Repositories;
 using Domain.SeedWork;
 using MediatR;
 
@@ -10,9 +11,11 @@ namespace Application.Handlers
     public class UserHandler : IRequestHandler<CreateUserCommand, ResponseObject<UserCreated>>
     {
         private readonly IMapper _mapper;
-        public UserHandler(IMapper mapper)
+        private readonly IUserRepository _userRepository;
+        public UserHandler(IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper;
+            _userRepository = userRepository;
         }
 
         public async Task<ResponseObject<UserCreated>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -21,10 +24,11 @@ namespace Application.Handlers
             if (!user.IsValid())
                 return new ResponseObject<UserCreated>(user.ValidationResult);
 
-            
-            
+            _userRepository.CreateUser(user);
 
-            throw new NotImplementedException();
+            await _userRepository.UnitOfWork.SaveEntitiesAsync();
+
+            return new ResponseObject<UserCreated>(null as UserCreated);
         }
     }
 }
