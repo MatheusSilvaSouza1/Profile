@@ -1,6 +1,9 @@
+using FluentValidation;
+using FluentValidation.Results;
+
 namespace Domain.SeedWork
 {
-    public class Entity
+    public abstract class Entity : IValidatable
     {
         Guid _Id;
         public virtual Guid Id
@@ -14,6 +17,8 @@ namespace Domain.SeedWork
                 _Id = value;
             }
         }
+
+        public ValidationResult ValidationResult { get; set; }
 
         public bool IsTransient()
         {
@@ -56,5 +61,8 @@ namespace Domain.SeedWork
         {
             return !(left == right);
         }
+
+        public abstract bool IsValid();
+
     }
 }
