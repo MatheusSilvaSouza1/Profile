@@ -11,6 +11,8 @@ namespace Domain
         public string CPF { get; set; }
         public DateTime BirthDate { get; set; }
         public string MotherName { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         public override bool IsValid()
         {

@@ -6,7 +6,7 @@ namespace API.Config
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(UserProfile).Assembly);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }
