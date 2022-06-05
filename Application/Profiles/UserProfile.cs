@@ -16,6 +16,13 @@ namespace Application.Profiles
                 .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             ;
+
+            //? Profile
+            CreateMap<LoginCreateDTO, Login>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
+            ;
+
         }
     }
 }
