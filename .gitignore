@@ -32,3 +32,7 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+*.db-wal
+*.db-shm
+Infra/ProfileDb.db-wal
+Infra/ProfileDb.db-shm

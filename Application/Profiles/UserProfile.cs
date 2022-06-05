@@ -1,4 +1,5 @@
 using Application.DTOs.Request;
+using Application.DTOs.Response;
 using AutoMapper;
 using Domain;
 
@@ -17,12 +18,27 @@ namespace Application.Profiles
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             ;
 
-            //? Profile
+            CreateMap<User, UserCreated>()
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
+                .ForMember(dest => dest.CPF, opt => opt.MapFrom(src => src.CPF))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
+            ;
+
+
+            //? Login
             CreateMap<LoginCreateDTO, Login>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
             ;
 
+            CreateMap<Login, LoginCreated>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
+            ;
         }
     }
 }

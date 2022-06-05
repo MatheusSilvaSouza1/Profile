@@ -28,7 +28,7 @@ namespace Application.Handlers
 
             await _userRepository.UnitOfWork.SaveEntitiesAsync();
 
-            return new ResponseObject<UserCreated>(null as UserCreated);
+            return new ResponseObject<UserCreated>(_mapper.Map<UserCreated>(user));
         }
     }
 }

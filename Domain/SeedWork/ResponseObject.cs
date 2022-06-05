@@ -10,6 +10,7 @@ public class ResponseObject<TResponse> : IValidatable
     public ResponseObject(TResponse data)
     {
         Data = data;
+        ValidationResult = new ValidationResult();
     }
 
     public ResponseObject(ValidationResult validationResult)
