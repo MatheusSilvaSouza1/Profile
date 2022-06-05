@@ -5,8 +5,8 @@ namespace Domain.SeedWork
 {
     public abstract class Entity : IValidatable
     {
-        Guid _Id;
-        public virtual Guid Id
+        string _Id;
+        public virtual string Id
         {
             get
             {
@@ -22,7 +22,7 @@ namespace Domain.SeedWork
 
         public bool IsTransient()
         {
-            return this.Id == default(Guid);
+            return this.Id == default(string);
         }
 
         public override bool Equals(object obj)
