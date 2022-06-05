@@ -3,7 +3,7 @@ using Domain.Validations.UserValidation;
 
 namespace Domain
 {
-    public class User : Entity
+    public class User : Entity, IAggregateRoot
     {
         public string Name { get; set; }
         public string Email { get; set; }
@@ -11,8 +11,10 @@ namespace Domain
         public string CPF { get; set; }
         public DateTime BirthDate { get; set; }
         public string MotherName { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public Login Login { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         public override bool IsValid()
         {
