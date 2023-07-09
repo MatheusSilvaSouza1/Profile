@@ -1,0 +1,5 @@
+{
+    "msbuild-sdks": {
+        "StyleCop.Analyzers": "1.1.118"
+    }
+}
