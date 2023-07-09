@@ -1,52 +1,59 @@
-using FluentValidation;
 using FluentValidation.Results;
 
 namespace Domain.SeedWork
 {
     public abstract class Entity : IValidatable
     {
-        string _Id;
+        private string _id;
+
         public virtual string Id
         {
             get
             {
-                return _Id;
+                return _id;
             }
-            protected set
-            {
-                _Id = value;
-            }
+            protected set => _id = value;
         }
 
         public ValidationResult ValidationResult { get; set; }
 
         public bool IsTransient()
         {
-            return this.Id == default(string);
+            return Id == default;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is Entity))
+            if (obj is null or not Entity)
+            {
                 return false;
+            }
 
-            if (Object.ReferenceEquals(this, obj))
+            if (ReferenceEquals(this, obj))
+            {
                 return true;
+            }
 
-            if (this.GetType() != obj.GetType())
+            if (GetType() != obj.GetType())
+            {
                 return false;
+            }
 
             Entity item = (Entity)obj;
 
-            if (item.IsTransient() || this.IsTransient())
+            if (item.IsTransient() || IsTransient())
+            {
                 return false;
+            }
             else
-                return item.Id == this.Id;
+            {
+                return item.Id == Id;
+            }
         }
 
         public override int GetHashCode()
         {
-            return _Id.GetHashCode() * 17 + Id.GetHashCode();
+            return _id.GetHashCode() * 17 + Id.GetHashCode();
         }
 
         public static bool operator ==(Entity left, Entity right)
@@ -63,6 +70,5 @@ namespace Domain.SeedWork
         }
 
         public abstract bool IsValid();
-
     }
 }

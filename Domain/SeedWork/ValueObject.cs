@@ -8,6 +8,7 @@ public abstract class ValueObject
         {
             return false;
         }
+
         return ReferenceEquals(left, null) || left.Equals(right);
     }
 

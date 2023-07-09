@@ -14,7 +14,7 @@ namespace Domain.Validations.UserValidation
             RuleFor(e => e.CPF)
                 .NotEmpty()
                 .NotNull();
-                
+
             RuleFor(e => e.Email)
                 .NotEmpty()
                 .NotNull()
