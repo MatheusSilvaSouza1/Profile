@@ -1,5 +1,5 @@
-using Application.Commands;
-using Application.DTOs.Response;
+using Domain.Commands;
+using Domain.DTOs.Response;
 using AutoMapper;
 using Domain;
 using Domain.Repositories;
@@ -26,7 +26,7 @@ namespace Application.Handlers
 
             _userRepository.CreateUser(user);
 
-            await _userRepository.UnitOfWork.SaveEntitiesAsync();
+            await _userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return new ResponseObject<UserCreated>(_mapper.Map<UserCreated>(user));
         }

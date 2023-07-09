@@ -1,5 +1,5 @@
-using Application.DTOs.Request;
-using Application.DTOs.Response;
+using Domain.DTOs.Request;
+using Domain.DTOs.Response;
 using AutoMapper;
 using Domain;
 

@@ -1,9 +1,9 @@
-using Application.DTOs.Request;
-using Application.DTOs.Response;
+using Domain.DTOs.Request;
+using Domain.DTOs.Response;
 using Domain.SeedWork;
 using MediatR;
 
-namespace Application.Commands
+namespace Domain.Commands
 {
     public class CreateUserCommand : IRequest<ResponseObject<UserCreated>>
     {

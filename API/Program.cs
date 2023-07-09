@@ -1,4 +1,4 @@
-using Application.Commands;
+using Domain.Commands;
 using MediatR;
 using API.Config;
 

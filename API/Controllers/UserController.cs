@@ -1,7 +1,5 @@
-using Application.Commands;
-using Application.DTOs.Request;
-using Application.DTOs.Response;
-using AutoMapper;
+using Domain.Commands;
+using Domain.DTOs.Request;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

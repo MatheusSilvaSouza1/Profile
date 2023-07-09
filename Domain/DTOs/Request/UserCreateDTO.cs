@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.DTOs.Request;
+namespace Domain.DTOs.Request;
 
 public class UserCreateDTO
 {
