@@ -1,4 +1,4 @@
-using Domain.Commands;
+﻿using Domain.Commands;
 using Domain.DTOs.Request;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,8 +21,10 @@ public class UserController : ControllerBase
     {
         var result = await _handler.Send(new CreateUserCommand(user));
         if (!result.ValidationResult.IsValid)
+        {
             return BadRequest(result.ValidationResult);
+        }
 
-        return Created("", result.Data);
+        return Created(string.Empty, result.Data);
     }
 }

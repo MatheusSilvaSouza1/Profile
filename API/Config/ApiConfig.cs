@@ -1,4 +1,4 @@
-using Infra;
+﻿using Infra;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Config

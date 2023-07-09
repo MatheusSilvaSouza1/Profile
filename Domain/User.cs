@@ -1,4 +1,4 @@
-using Domain.SeedWork;
+﻿using Domain.SeedWork;
 using Domain.Validations.UserValidation;
 
 namespace Domain

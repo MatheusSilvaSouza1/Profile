@@ -1,7 +1,7 @@
+﻿using AutoMapper;
+using Domain;
 using Domain.DTOs.Request;
 using Domain.DTOs.Response;
-using AutoMapper;
-using Domain;
 
 namespace Application.Profiles
 {
@@ -28,7 +28,6 @@ namespace Application.Profiles
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
             ;
-
 
             //? Login
             CreateMap<LoginCreateDTO, Login>()

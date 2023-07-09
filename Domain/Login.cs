@@ -1,5 +1,4 @@
-using Domain.SeedWork;
-using FluentValidation;
+﻿using Domain.SeedWork;
 
 namespace Domain
 {

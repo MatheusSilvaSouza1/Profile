@@ -27,15 +27,22 @@ charset = utf-8-bom
 
 dotnet_diagnostic.SA1028.severity = error
 dotnet_diagnostic.SA1101.severity = none
+dotnet_diagnostic.SA1122.severity = error
 dotnet_diagnostic.SA1200.severity = none
 dotnet_diagnostic.SA1309.severity = none
+dotnet_diagnostic.SA1413.severity = none
+dotnet_diagnostic.SA1500.severity = error
+dotnet_diagnostic.SA1503.severity = error
 dotnet_diagnostic.SA1508.severity = error
 dotnet_diagnostic.SA1513.severity = error
+dotnet_diagnostic.SA1516.severity = none
+dotnet_diagnostic.SA1201.severity = none
 dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1633.severity = none
 
 
 dotnet_diagnostic.CA1062.severity = none
+dotnet_diagnostic.CA1040.severity = none
 dotnet_diagnostic.CA2007.severity = none
 dotnet_diagnostic.CA2234.severity = none
-dotnet_diagnostic.CS8019.severity = error
+dotnet_diagnostic.CS8019.severity = none

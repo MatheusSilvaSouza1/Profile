@@ -1,7 +1,7 @@
+﻿using AutoMapper;
+using Domain;
 using Domain.Commands;
 using Domain.DTOs.Response;
-using AutoMapper;
-using Domain;
 using Domain.Repositories;
 using Domain.SeedWork;
 using MediatR;
@@ -22,7 +22,9 @@ namespace Application.Handlers
         {
             var user = _mapper.Map<User>(request.User);
             if (!user.IsValid())
+            {
                 return new ResponseObject<UserCreated>(user.ValidationResult);
+            }
 
             _userRepository.CreateUser(user);
 

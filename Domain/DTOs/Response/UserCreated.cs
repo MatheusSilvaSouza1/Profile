@@ -1,4 +1,4 @@
-namespace Domain.DTOs.Response
+﻿namespace Domain.DTOs.Response
 {
     public class UserCreated
     {

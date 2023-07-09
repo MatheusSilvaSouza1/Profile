@@ -1,4 +1,4 @@
-using Domain;
+﻿using Domain;
 using Domain.SeedWork;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +7,14 @@ namespace Infra
 {
     public class WriteContext : DbContext, IUnitOfWork
     {
-        public WriteContext(DbContextOptions<WriteContext> options) : base(options) { }
+        public WriteContext(DbContextOptions<WriteContext> options)
+            : base(options)
+        {
+        }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            return await base.SaveChangesAsync(cancellationToken) > 1;
+            return await SaveChangesAsync(cancellationToken) > 1;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
