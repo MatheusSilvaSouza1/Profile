@@ -1,5 +1,10 @@
-﻿using Domain.Repositories;
+﻿using Application.Handlers;
+using Domain.Commands;
+using Domain.DTOs.Response;
+using Domain.Repositories;
+using Domain.SeedWork;
 using Infra.Repositories;
+using MediatR;
 
 namespace API.Config
 {
@@ -10,6 +15,8 @@ namespace API.Config
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IRequestHandler<CreateUserCommand, ResponseObject<UserCreated>>, UserHandler>();
         }
     }
 }
