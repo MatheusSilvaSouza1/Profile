@@ -20,7 +20,7 @@ namespace Application.Profiles
 
             CreateMap<User, UserCreated>()
                 .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
-                .ForMember(dest => dest.CPF, opt => opt.MapFrom(src => src.CPF))
+                .ForMember(dest => dest.CPF, opt => opt.MapFrom(src => src.CPF.ToStringFormatted()))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

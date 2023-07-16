@@ -45,5 +45,10 @@ namespace Domain.Types
         {
             return Value;
         }
+
+        public string ToStringFormatted()
+        {
+            return $"{Value[..3]}.{Value.Substring(3, 3)}.{Value.Substring(6, 3)}-{Value[9..]}";
+        }
     }
 }
