@@ -1,4 +1,5 @@
 ﻿using Domain.SeedWork;
+using Domain.Types;
 using Domain.Validations.UserValidation;
 
 namespace Domain
@@ -8,7 +9,7 @@ namespace Domain
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string CPF { get; set; }
+        public Cpf CPF { get; set; }
         public DateTime BirthDate { get; set; }
         public string MotherName { get; set; }
         public Login Login { get; set; }

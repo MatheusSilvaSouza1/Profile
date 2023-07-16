@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +20,8 @@ namespace Infra.Mappings
                 .IsRequired();
 
             builder.Property(e => e.CPF)
-                .IsRequired();
+                .IsRequired()
+                .HasConversion(e => e.Value, e => e);
 
             builder.Property(e => e.Email)
                 .IsRequired();
