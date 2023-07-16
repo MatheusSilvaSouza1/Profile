@@ -1,6 +1,8 @@
-﻿using Domain;
+﻿using System.Linq.Expressions;
+using Domain;
 using Domain.Repositories;
 using Domain.SeedWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
@@ -19,14 +21,19 @@ namespace Infra.Repositories
             _context.Users.Add(user);
         }
 
-        public Task<List<User>> FindAllUser()
+        public async Task<List<User>> FindAllUser()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<User> FindUser(string userId)
+        public async Task<List<User>> Find(Expression<Func<User, bool>> condition)
         {
-            throw new NotImplementedException();
+            return await _context.Users.Where(condition).ToListAsync();
+        }
+
+        public async Task<User?> FindOne(Expression<Func<User, bool>> condition)
+        {
+            return await _context.Users.FirstOrDefaultAsync(condition);
         }
     }
 }

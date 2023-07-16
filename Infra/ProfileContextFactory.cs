@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Infra
 {
-    public class BackOfficeContextFactory : IDesignTimeDbContextFactory<WriteContext>
+    public class ProfileContextFactory : IDesignTimeDbContextFactory<WriteContext>
 
     {
         public WriteContext CreateDbContext(string[] args)

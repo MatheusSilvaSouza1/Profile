@@ -1,6 +1,11 @@
-﻿namespace Domain.SeedWork;
+﻿using System.Linq.Expressions;
 
-public interface IRepository<T> where T : IAggregateRoot
+namespace Domain.SeedWork;
+
+public interface IRepository<T>
+    where T : IAggregateRoot
 {
     IUnitOfWork UnitOfWork { get; }
+    Task<List<T>> Find(Expression<Func<T, bool>> condition);
+    Task<T?> FindOne(Expression<Func<T, bool>> condition);
 }
