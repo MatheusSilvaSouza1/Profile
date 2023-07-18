@@ -8,7 +8,7 @@ namespace Domain
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; }
+        public Phone Phone { get; set; }
         public Cpf CPF { get; set; }
         public DateTime BirthDate { get; set; }
         public string MotherName { get; set; }

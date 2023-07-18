@@ -10,7 +10,6 @@ namespace Domain.Types
     public sealed class Cpf : ValueObject
     {
         public string Value { get; }
-
         private const int MaxNumberCaracteres = 11;
         private static readonly IReadOnlyCollection<string> _invalidCpfs = new List<string>()
         {
@@ -37,7 +36,7 @@ namespace Domain.Types
             var cleanCaractereInvalid = Regex.Replace(cpf, @"[^0-9]", string.Empty);
             if (_invalidCpfs.Contains(cpf) || string.IsNullOrEmpty(cleanCaractereInvalid) || cleanCaractereInvalid.Length != MaxNumberCaracteres)
             {
-                throw new ArgumentException("Cpf invalido!");
+                throw new ArgumentException($"{cpf} - Cpf invalido!");
             }
 
             Span<int> numbers = stackalloc int[11];

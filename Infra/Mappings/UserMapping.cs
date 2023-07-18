@@ -30,7 +30,8 @@ namespace Infra.Mappings
 
             builder.Property(e => e.MotherName);
 
-            builder.Property(e => e.Phone);
+            builder.Property(e => e.Phone)
+                .HasConversion(e => e.Value, e => e);
 
             builder.Property(e => e.CreatedAt)
                 .ValueGeneratedOnAdd()
