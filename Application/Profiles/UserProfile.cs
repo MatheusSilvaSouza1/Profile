@@ -18,7 +18,7 @@ namespace Application.Profiles
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             ;
 
-            CreateMap<User, UserCreated>()
+            CreateMap<User, UserCreatedDTO>()
                 .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
                 .ForMember(dest => dest.CPF, opt => opt.MapFrom(src => src.CPF.ToStringFormatted()))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
@@ -35,7 +35,7 @@ namespace Application.Profiles
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
             ;
 
-            CreateMap<Login, LoginCreated>()
+            CreateMap<Login, LoginCreatedDTO>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
             ;
         }

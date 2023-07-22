@@ -16,7 +16,7 @@ namespace API.Config
 
             services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddScoped<IRequestHandler<CreateUserCommand, ResponseObject<UserCreated>>, UserHandler>();
+            services.AddScoped<IRequestHandler<CreateUserCommand, ResponseObject<UserCreatedDTO>>, UserHandler>();
         }
     }
 }

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Handlers
 {
-    public class UserHandler : IRequestHandler<CreateUserCommand, ResponseObject<UserCreated>>
+    public class UserHandler : IRequestHandler<CreateUserCommand, ResponseObject<UserCreatedDTO>>
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
@@ -18,19 +18,19 @@ namespace Application.Handlers
             _userRepository = userRepository;
         }
 
-        public async Task<ResponseObject<UserCreated>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseObject<UserCreatedDTO>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = User.Create(request.User);
             if (!user.IsValidCreateUser())
             {
-                return new ResponseObject<UserCreated>(user.ValidationResult);
+                return new ResponseObject<UserCreatedDTO>(user.ValidationResult);
             }
 
             _userRepository.CreateUser(user);
 
             await _userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-            return new ResponseObject<UserCreated>(_mapper.Map<UserCreated>(user));
+            return new ResponseObject<UserCreatedDTO>(_mapper.Map<UserCreatedDTO>(user));
         }
     }
 }

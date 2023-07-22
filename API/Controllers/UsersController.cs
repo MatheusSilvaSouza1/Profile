@@ -41,7 +41,7 @@ public class UsersController : ControllerBase
         var users = await _userRepository.FindAllUser();
         if (users.Any())
         {
-            return Ok(_mapper.Map<List<UserCreated>>(users));
+            return Ok(_mapper.Map<List<UserCreatedDTO>>(users));
         }
 
         return NoContent();

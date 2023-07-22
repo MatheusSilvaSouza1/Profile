@@ -1,6 +1,6 @@
 ﻿namespace Domain.DTOs.Response
 {
-    public class LoginCreated
+    public class LoginCreatedDTO
     {
         public string UserName { get; set; }
     }

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Domain.Commands
 {
-    public class CreateUserCommand : IRequest<ResponseObject<UserCreated>>
+    public sealed class CreateUserCommand : IRequest<ResponseObject<UserCreatedDTO>>
     {
         public UserCreateDTO User { get; set; }
 
