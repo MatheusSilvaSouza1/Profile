@@ -9,7 +9,7 @@ namespace Infra
         public WriteContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<WriteContext>();
-            optionsBuilder.UseSqlite("Data Source=./ProfileDb.db;Cache=Shared");
+            optionsBuilder.UseNpgsql("Host=localhost; Database=Profile; Username=postgres; Password=33632292");
 
             return new WriteContext(optionsBuilder.Options);
         }

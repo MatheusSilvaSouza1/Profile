@@ -6,5 +6,6 @@ namespace Domain.Repositories
     {
         public void CreateUser(User user);
         public Task<List<User>> FindAllUser();
+        public Task<User> FindOne(string userId);
     }
 }
