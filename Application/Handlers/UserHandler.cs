@@ -20,7 +20,7 @@ namespace Application.Handlers
 
         public async Task<ResponseObject<UserCreated>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<User>(request.User);
+            var user = User.Create(request.User);
             if (!user.IsValid())
             {
                 return new ResponseObject<UserCreated>(user.ValidationResult);

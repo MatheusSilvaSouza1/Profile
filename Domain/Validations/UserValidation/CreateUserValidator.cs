@@ -31,6 +31,9 @@ namespace Domain.Validations.UserValidation
             RuleFor(e => e.Phone)
                 .NotEmpty()
                 .NotNull();
+
+            RuleFor(e => e.Login)
+                .SetValidator(new CreateLoginValidator());
         }
     }
 }

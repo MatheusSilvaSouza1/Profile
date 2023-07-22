@@ -42,8 +42,11 @@ namespace Infra.Mappings
                 .ValueGeneratedOnUpdate()
                 .HasValueGenerator((_, __) => new DateTimeGenerator());
 
-            // builder.HasOne(e => e.Login)
-            //     .WithOne(e => e.User);
+            builder.OwnsOne(user => user.Login, loginBuilder =>
+            {
+                loginBuilder.Property(e => e.UserName).IsRequired();
+                loginBuilder.Property(e => e.Password).IsRequired();
+            });
         }
     }
 }
