@@ -15,7 +15,7 @@ namespace Domain.SeedWork
             protected set => _id = value;
         }
 
-        public ValidationResult ValidationResult { get; set; }
+        public ValidationResult ValidationResult { get; set; } = new();
 
         public bool IsTransient()
         {
