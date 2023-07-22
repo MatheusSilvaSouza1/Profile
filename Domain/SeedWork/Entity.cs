@@ -58,9 +58,9 @@ namespace Domain.SeedWork
 
         public static bool operator ==(Entity left, Entity right)
         {
-            if (Object.Equals(left, null))
+            if (Equals(left, null))
             {
-                return (Object.Equals(right, null)) ? true : false;
+                return Equals(right, null);
             }
             else
             {
@@ -72,7 +72,5 @@ namespace Domain.SeedWork
         {
             return !(left == right);
         }
-
-        public abstract bool IsValid();
     }
 }
