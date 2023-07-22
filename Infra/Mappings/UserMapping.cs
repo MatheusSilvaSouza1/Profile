@@ -47,6 +47,11 @@ namespace Infra.Mappings
                 loginBuilder.Property(e => e.UserName).IsRequired();
                 loginBuilder.Property(e => e.Password).IsRequired();
             });
+
+            builder.HasMany(e => e.Addresses)
+                .WithOne(e => e.User)
+                .HasPrincipalKey(e => e.Id)
+                .HasForeignKey(e => e.UserId);
         }
     }
 }
