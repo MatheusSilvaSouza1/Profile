@@ -23,7 +23,7 @@ namespace Infra.Repositories
 
         public async Task<List<User>> FindAllUser()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(e => e.Addresses).ToListAsync();
         }
 
         public async Task<List<User>> Find(Expression<Func<User, bool>> condition)
@@ -34,6 +34,16 @@ namespace Infra.Repositories
         public async Task<User?> FindOne(Expression<Func<User, bool>> condition)
         {
             return await _context.Users.FirstOrDefaultAsync(condition);
+        }
+
+        public void Update(User user)
+        {
+            _context.Users.Update(user);
+        }
+
+        public async Task<User?> FindOne(string userId)
+        {
+            return await _context.Users.Include(e => e.Addresses).FirstOrDefaultAsync(e => e.Id == userId);
         }
     }
 }

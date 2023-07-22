@@ -24,9 +24,9 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(UserCreateDTO user)
+    public async Task<IActionResult> Post(UserCreateDTO user, CancellationToken cancellationToken)
     {
-        var result = await _handler.Send(new CreateUserCommand(user));
+        var result = await _handler.Send(new CreateUserCommand(user), cancellationToken);
         if (!result.ValidationResult.IsValid)
         {
             return BadRequest(result.ValidationResult);
@@ -41,9 +41,22 @@ public class UsersController : ControllerBase
         var users = await _userRepository.FindAllUser();
         if (users.Any())
         {
-            return Ok(_mapper.Map<List<UserCreatedDTO>>(users));
+            return Ok(_mapper.Map<List<UserSummaryDTO>>(users));
         }
 
         return NoContent();
+    }
+
+    [HttpPost("{userId}/address")]
+    public async Task<IActionResult> PostAddress(string userId, [FromBody] CreateAddressDTO address, CancellationToken cancellationToken)
+    {
+        var command = new CreateAddressCommand(userId, address);
+        var result = await _handler.Send(command, cancellationToken);
+        if (!result.ValidationResult.IsValid)
+        {
+            return BadRequest(result.ValidationResult);
+        }
+
+        return Created(string.Empty, result.Data);
     }
 }

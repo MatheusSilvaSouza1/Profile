@@ -11,7 +11,7 @@ namespace Domain.Validations.UserValidation
         public CreateUserAddressValidator()
         {
             RuleFor(e => e.Addresses.Count(a => a.IsDefault))
-                .Equal(1)
+                .LessThanOrEqualTo(1)
                 .WithMessage("Só é permitido um endereço padrão por usuário");
 
             RuleForEach(e => e.Addresses)

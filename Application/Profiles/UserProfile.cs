@@ -15,8 +15,7 @@ namespace Application.Profiles
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
                 .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-            ;
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
 
             CreateMap<User, UserCreatedDTO>()
                 .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
@@ -26,18 +25,51 @@ namespace Application.Profiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
-            ;
+                .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login));
 
-            //? Login
+            CreateMap<User, UserSummaryDTO>()
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
+                .ForMember(dest => dest.CPF, opt => opt.MapFrom(src => src.CPF.ToStringFormatted()))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.MotherName, opt => opt.MapFrom(src => src.MotherName))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
+                .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.Addresses));
+
+            // ? Login
             CreateMap<LoginCreateDTO, Login>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
-                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
-            ;
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName));
 
             CreateMap<Login, LoginCreatedDTO>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
-            ;
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName));
+
+            CreateMap<Login, LoginSummaryDTO>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName));
+
+            // ? Address
+            CreateMap<CreateAddressDTO, Address>()
+                .ConstructUsing(e =>
+                    Address.Create(
+                        e.UserId, e.Street, e.District, e.City, e.State, e.Country, e.IsDefault));
+
+            CreateMap<Address, AddressCreatedDTO>()
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country))
+                .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.District))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.IsDefault, opt => opt.MapFrom(src => src.IsDefault))
+                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State))
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Street));
+
+            CreateMap<Address, AddressSummaryDTO>()
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country))
+                .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.District))
+                .ForMember(dest => dest.IsDefault, opt => opt.MapFrom(src => src.IsDefault))
+                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State))
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Street));
         }
     }
 }

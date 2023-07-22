@@ -6,8 +6,15 @@ namespace Domain;
 
 public sealed class Address : Entity
 {
-    private Address(string street, string district, string city, string state, string country, bool isDefault)
+    [Obsolete("Construtor criado apenas para o funcionamento do ef")]
+    public Address()
     {
+    }
+
+    private Address(string userId, string street, string district, string city, string state, string country, bool isDefault)
+    {
+        Id = Guid.NewGuid().ToString();
+        UserId = userId;
         Street = street;
         District = district;
         City = city;
@@ -26,6 +33,7 @@ public sealed class Address : Entity
     public User User { get; private set; }
 
     public static Address Create(
+        string userId,
         string street,
         string district,
         string city,
@@ -33,18 +41,18 @@ public sealed class Address : Entity
         string country,
         bool isDefault)
     {
-        return new(street, district, city, state, country, isDefault);
-    }
-
-    internal void CheckAddressDefault()
-    {
-        IsDefault = true;
+        return new(userId, street, district, city, state, country, isDefault);
     }
 
     public bool IsValidCreate()
     {
         ValidationResult = new CreateAddressValidator().Validate(this);
         return ValidationResult.IsValid;
+    }
+
+    internal void CheckAddressDefault()
+    {
+        IsDefault = true;
     }
 
     internal void UnCheckAddressDefault()

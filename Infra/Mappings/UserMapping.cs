@@ -9,6 +9,8 @@ namespace Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.ToTable("Users");
+
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Id)
@@ -47,11 +49,6 @@ namespace Infra.Mappings
                 loginBuilder.Property(e => e.UserName).IsRequired();
                 loginBuilder.Property(e => e.Password).IsRequired();
             });
-
-            builder.HasMany(e => e.Addresses)
-                .WithOne(e => e.User)
-                .HasPrincipalKey(e => e.Id)
-                .HasForeignKey(e => e.UserId);
         }
     }
 }

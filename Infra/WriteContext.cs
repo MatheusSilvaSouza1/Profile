@@ -14,7 +14,7 @@ namespace Infra
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
-            return await SaveChangesAsync(cancellationToken) > 1;
+            return await SaveChangesAsync(cancellationToken) > 0;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,5 +24,6 @@ namespace Infra
         }
 
         public virtual DbSet<User> Users => Set<User>();
+        public virtual DbSet<Address> Addresses => Set<Address>();
     }
 }

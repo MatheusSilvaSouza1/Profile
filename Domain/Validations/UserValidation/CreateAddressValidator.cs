@@ -29,8 +29,7 @@ namespace Domain.Validations.UserValidation
 
             RuleFor(e => e.Street)
                 .NotEmpty()
-                .NotNull()
-                .Length(2);
+                .NotNull();
         }
     }
 }

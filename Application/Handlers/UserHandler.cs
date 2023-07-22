@@ -4,11 +4,14 @@ using Domain.Commands;
 using Domain.DTOs.Response;
 using Domain.Repositories;
 using Domain.SeedWork;
+using FluentValidation.Results;
 using MediatR;
 
 namespace Application.Handlers
 {
-    public class UserHandler : IRequestHandler<CreateUserCommand, ResponseObject<UserCreatedDTO>>
+    public class UserHandler :
+        IRequestHandler<CreateUserCommand, ResponseObject<UserCreatedDTO>>,
+        IRequestHandler<CreateAddressCommand, ResponseObject<AddressCreatedDTO>>
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
@@ -23,14 +26,36 @@ namespace Application.Handlers
             var user = User.Create(request.User);
             if (!user.IsValidCreateUser())
             {
-                return new ResponseObject<UserCreatedDTO>(user.ValidationResult);
+                return ResponseObject<UserCreatedDTO>.Failure(user.ValidationResult);
             }
 
             _userRepository.CreateUser(user);
 
             await _userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-            return new ResponseObject<UserCreatedDTO>(_mapper.Map<UserCreatedDTO>(user));
+            return ResponseObject<UserCreatedDTO>.Success(_mapper.Map<UserCreatedDTO>(user));
+        }
+
+        public async Task<ResponseObject<AddressCreatedDTO>> Handle(CreateAddressCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.FindOne(request.UserId);
+            if (user == null)
+            {
+                var failure = ResponseObject<AddressCreatedDTO>.Failure(new ValidationResult());
+                failure.AddError("create.address", "Usuário não existe!");
+                return failure;
+            }
+
+            var address = _mapper.Map<Address>(request.Address);
+            var result = user.CreateAddress(address);
+
+            if (result.IsValid)
+            {
+                var r = await _userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+                return ResponseObject<AddressCreatedDTO>.Success(_mapper.Map<AddressCreatedDTO>(address));
+            }
+
+            return ResponseObject<AddressCreatedDTO>.Failure(result);
         }
     }
 }

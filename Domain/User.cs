@@ -35,8 +35,8 @@ namespace Domain
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-        private HashSet<Address> _address = new();
-        public virtual IReadOnlyCollection<Address> Addresses { get => _address; }
+        private readonly HashSet<Address> _address = new();
+        public IReadOnlyList<Address> Addresses => _address.ToList();
 
         public static User Create(UserCreateDTO user)
         {
