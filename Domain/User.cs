@@ -2,6 +2,7 @@
 using Domain.SeedWork;
 using Domain.Types;
 using Domain.Validations.UserValidation;
+using FluentValidation.Results;
 
 namespace Domain
 {
@@ -34,15 +35,55 @@ namespace Domain
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-        public static User Create(UserCreateDTO user)
-        => new(user.Name, user.Email, user.Phone,
-            user.CPF, user.BirthDate, user.MotherName,
-            new Login(user.Login.UserName, user.Login.Password));
+        private HashSet<Address> _address = new();
+        public virtual IReadOnlyCollection<Address> Addresses { get => _address; }
 
-        public bool IsValid()
+        public static User Create(UserCreateDTO user)
+        {
+            return new(user.Name, user.Email, user.Phone,
+                    user.CPF, user.BirthDate, user.MotherName,
+                    new Login(user.Login.UserName, user.Login.Password));
+        }
+
+        public ValidationResult CreateAddress(Address address)
+        {
+            if (!_address.Any())
+            {
+                address.CheckAddressDefault();
+            }
+
+            if (address.IsDefault)
+            {
+                UnCheckAddressDefault();
+            }
+
+            if (!IsValidCreateAddress())
+            {
+                return ValidationResult;
+            }
+
+            _address.Add(address);
+            return ValidationResult;
+        }
+
+        public bool IsValidCreateUser()
         {
             ValidationResult = new CreateUserValidator().Validate(this);
             return ValidationResult.IsValid;
+        }
+
+        private bool IsValidCreateAddress()
+        {
+            ValidationResult = new CreateUserAddressValidator().Validate(this);
+            return ValidationResult.IsValid;
+        }
+
+        private void UnCheckAddressDefault()
+        {
+            foreach (var address in _address)
+            {
+                address.UnCheckAddressDefault();
+            }
         }
     }
 }

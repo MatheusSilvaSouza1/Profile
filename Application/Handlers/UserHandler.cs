@@ -21,7 +21,7 @@ namespace Application.Handlers
         public async Task<ResponseObject<UserCreated>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = User.Create(request.User);
-            if (!user.IsValid())
+            if (!user.IsValidCreateUser())
             {
                 return new ResponseObject<UserCreated>(user.ValidationResult);
             }
