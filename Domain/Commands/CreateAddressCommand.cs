@@ -6,7 +6,7 @@ using MediatR;
 namespace Domain.Commands
 {
     public sealed record CreateAddressCommand(
-        string UserId,
+        Guid UserId,
         CreateAddressDTO Address)
     : IRequest<ResponseObject<AddressCreatedDTO>>;
 }

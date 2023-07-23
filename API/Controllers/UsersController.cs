@@ -48,7 +48,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("{userId}/address")]
-    public async Task<IActionResult> PostAddress(string userId, [FromBody] CreateAddressDTO address, CancellationToken cancellationToken)
+    public async Task<IActionResult> PostAddress(Guid userId, [FromBody] CreateAddressDTO address, CancellationToken cancellationToken)
     {
         var command = new CreateAddressCommand(userId, address);
         var result = await _handler.Send(command, cancellationToken);

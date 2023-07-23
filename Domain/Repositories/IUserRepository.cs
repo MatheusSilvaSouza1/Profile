@@ -4,8 +4,8 @@ namespace Domain.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        public void CreateUser(User user);
-        public Task<List<User>> FindAllUser();
-        public Task<User> FindOne(string userId);
+        void CreateUser(User user);
+        Task<List<User>> FindAllUser();
+        Task<User> FindOne(Guid userId);
     }
 }

@@ -8,13 +8,13 @@ namespace Domain.Validations.UserValidation
 {
     public class CreateUserAddressValidator : AbstractValidator<User>
     {
-        public CreateUserAddressValidator()
+        public CreateUserAddressValidator(Address address)
         {
-            RuleFor(e => e.Addresses.Count(a => a.IsDefault))
+            RuleFor(e => e.Addresses.Append(address).Count(a => a.IsDefault))
                 .LessThanOrEqualTo(1)
                 .WithMessage("Só é permitido um endereço padrão por usuário");
 
-            RuleForEach(e => e.Addresses)
+            RuleFor(e => address)
                 .SetValidator(new CreateAddressValidator());
         }
     }

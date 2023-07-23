@@ -4,16 +4,15 @@ using Domain.Validations.UserValidation;
 
 namespace Domain;
 
-public sealed class Address : Entity
+public class Address : Entity
 {
     [Obsolete("Construtor criado apenas para o funcionamento do ef")]
     public Address()
     {
     }
 
-    private Address(string userId, string street, string district, string city, string state, string country, bool isDefault)
+    private Address(Guid userId, string street, string district, string city, string state, string country, bool isDefault)
     {
-        Id = Guid.NewGuid().ToString();
         UserId = userId;
         Street = street;
         District = district;
@@ -29,11 +28,10 @@ public sealed class Address : Entity
     public string State { get; private set; }
     public string Country { get; private set; }
     public bool IsDefault { get; private set; }
-    public string UserId { get; private set; }
-    public User User { get; private set; }
+    public virtual Guid UserId { get; private set; }
 
     public static Address Create(
-        string userId,
+        Guid userId,
         string street,
         string district,
         string city,

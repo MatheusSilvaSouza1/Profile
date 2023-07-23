@@ -15,6 +15,7 @@ namespace Application.Handlers
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
+
         public UserHandler(IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper;
@@ -46,13 +47,13 @@ namespace Application.Handlers
                 return failure;
             }
 
-            var address = _mapper.Map<Address>(request.Address);
-            var result = user.CreateAddress(address);
+            // var address = _mapper.Map<Address>(request.Address);
+            var result = user.CreateAddress(request.Address);
 
             if (result.IsValid)
             {
-                var r = await _userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-                return ResponseObject<AddressCreatedDTO>.Success(_mapper.Map<AddressCreatedDTO>(address));
+                await _userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+                return ResponseObject<AddressCreatedDTO>.Success(null);
             }
 
             return ResponseObject<AddressCreatedDTO>.Failure(result);

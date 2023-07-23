@@ -41,7 +41,7 @@ namespace Infra.Repositories
             _context.Users.Update(user);
         }
 
-        public async Task<User?> FindOne(string userId)
+        public async Task<User?> FindOne(Guid userId)
         {
             return await _context.Users.Include(e => e.Addresses).FirstOrDefaultAsync(e => e.Id == userId);
         }

@@ -35,8 +35,8 @@ namespace Domain
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-        private readonly HashSet<Address> _address = new();
-        public IReadOnlyList<Address> Addresses => _address.ToList();
+        private readonly HashSet<Address> _addresses = new();
+        public virtual IReadOnlyCollection<Address> Addresses => _addresses.ToList().AsReadOnly();
 
         public static User Create(UserCreateDTO user)
         {
@@ -45,9 +45,14 @@ namespace Domain
                     new Login(user.Login.UserName, user.Login.Password));
         }
 
-        public ValidationResult CreateAddress(Address address)
+        public ValidationResult CreateAddress(CreateAddressDTO addressDTO)
         {
-            if (!_address.Any())
+            var address = Address.Create(
+                Id, addressDTO.Street, addressDTO.District,
+                addressDTO.City, addressDTO.State, addressDTO.Country,
+                addressDTO.IsDefault);
+
+            if (!_addresses.Any())
             {
                 address.CheckAddressDefault();
             }
@@ -57,12 +62,12 @@ namespace Domain
                 UnCheckAddressDefault();
             }
 
-            if (!IsValidCreateAddress())
+            if (!IsValidCreateAddress(address))
             {
                 return ValidationResult;
             }
 
-            _address.Add(address);
+            _addresses.Add(address);
             return ValidationResult;
         }
 
@@ -72,15 +77,15 @@ namespace Domain
             return ValidationResult.IsValid;
         }
 
-        private bool IsValidCreateAddress()
+        private bool IsValidCreateAddress(Address address)
         {
-            ValidationResult = new CreateUserAddressValidator().Validate(this);
+            ValidationResult = new CreateUserAddressValidator(address).Validate(this);
             return ValidationResult.IsValid;
         }
 
         private void UnCheckAddressDefault()
         {
-            foreach (var address in _address)
+            foreach (var address in _addresses)
             {
                 address.UnCheckAddressDefault();
             }

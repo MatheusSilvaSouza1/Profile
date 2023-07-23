@@ -49,10 +49,6 @@ namespace Application.Profiles
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName));
 
             // ? Address
-            CreateMap<CreateAddressDTO, Address>()
-                .ConstructUsing(e =>
-                    Address.Create(
-                        e.UserId, e.Street, e.District, e.City, e.State, e.Country, e.IsDefault));
 
             CreateMap<Address, AddressCreatedDTO>()
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
