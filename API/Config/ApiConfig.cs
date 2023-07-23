@@ -9,7 +9,7 @@ namespace API.Config
         {
             services.AddDbContext<WriteContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
                 options.EnableSensitiveDataLogging();
             });
 
