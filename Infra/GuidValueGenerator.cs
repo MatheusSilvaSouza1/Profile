@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace Infra
 {
-    public class GuidValueGenerator : ValueGenerator<string>
+    public class GuidValueGenerator : ValueGenerator<Guid>
     {
         public GuidValueGenerator() { }
 
         public override bool GeneratesTemporaryValues => false;
 
-        public override string Next(EntityEntry entry)
+        public override Guid Next(EntityEntry entry)
         {
-            return Guid.NewGuid().ToString();
+            return Guid.NewGuid();
         }
     }
 }

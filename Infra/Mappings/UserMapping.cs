@@ -15,6 +15,7 @@ namespace Infra.Mappings
 
             builder.Property(e => e.Id)
                 .HasMaxLength(40)
+                .HasConversion(e => e.ToString(), value => Guid.Parse(value))
                 .ValueGeneratedOnAdd()
                 .HasValueGenerator((a, b) => new GuidValueGenerator());
 
@@ -49,6 +50,15 @@ namespace Infra.Mappings
                 loginBuilder.Property(e => e.UserName).IsRequired();
                 loginBuilder.Property(e => e.Password).IsRequired();
             });
+
+            builder.HasMany(e => e.Addresses)
+                .WithOne()
+                .HasPrincipalKey(e => e.Id)
+                .HasForeignKey(e => e.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Navigation(e => e.Addresses).Metadata.SetField("_addresses");
         }
     }
 }

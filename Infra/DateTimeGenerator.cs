@@ -16,7 +16,7 @@ namespace Infra
                 throw new ArgumentNullException(nameof(entry));
             }
 
-            return DateTime.UtcNow;
+            return DateTime.UtcNow.AddHours(-3);
         }
     }
 }

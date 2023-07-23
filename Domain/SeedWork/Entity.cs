@@ -4,9 +4,9 @@ namespace Domain.SeedWork
 {
     public abstract class Entity : IValidatable
     {
-        private string _id;
+        private Guid _id;
 
-        public virtual string Id
+        public virtual Guid Id
         {
             get
             {
@@ -51,11 +51,6 @@ namespace Domain.SeedWork
             }
         }
 
-        public override int GetHashCode()
-        {
-            return _id.GetHashCode() * 17 + Id.GetHashCode();
-        }
-
         public static bool operator ==(Entity left, Entity right)
         {
             if (Equals(left, null))
@@ -72,5 +67,7 @@ namespace Domain.SeedWork
         {
             return !(left == right);
         }
+
+        public override int GetHashCode() => _id.GetHashCode();
     }
 }
